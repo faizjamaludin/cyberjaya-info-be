@@ -4,6 +4,7 @@ require("dotenv").config();
 
 // set express
 const app = express();
+app.use(express.json())
 
 // Set variable
 var usersRouter = require("./src/Routes/users.routes");
@@ -24,6 +25,7 @@ mongoose
 
 //   Mount Routes
 app.use("/users", usersRouter);
+app.use(express.json())
 
 // Start server
 app.listen(PORT, () => {

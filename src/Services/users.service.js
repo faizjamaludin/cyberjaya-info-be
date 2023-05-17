@@ -1,25 +1,40 @@
-const User = require("../Models/userModel");
+const User = require('../Models/userModel');
+const bcrypt = require('bcrypt');
 
-// get user by id
+
+const saltRounds = 10;
+
 const getUser = async (id) => {
   const user = await User.findById(id);
-
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
-
   return user;
 };
 
-// create user
 const createUser = async (userData) => {
-  const user = new User(userData);
-  await user.save();
-  console.log(userData);
-  return user;
+
+  bcrypt.hash(userData.password, saltRounds, (err, hash) => {
+    if (err) {
+      return resizeBy.status(500).json(err);
+    } else {
+      const user = new User({
+        name: userData.name,
+        email: userData.email,
+        password: hash,
+      })
+
+      user.save();
+      return user;
+    }
+  })
+
+  // const user = new User(userData);
+  // await user.save();
+  // return user;
 };
 
 module.exports = {
   getUser,
-  createUser,
-};
+  createUser
+}
