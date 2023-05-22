@@ -12,7 +12,8 @@ const getUser = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   try {
     const user = await userService.createUser(req.body);
-    res.status(201).json(user);
+    res.status(201).send({ message: 'register successful' });
+    // res.status(201).json(user);
   } catch (err) {
     next(err);
   }

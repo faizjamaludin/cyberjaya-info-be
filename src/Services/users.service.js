@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
+// get user from database using id
 const getUser = async (id) => {
   const user = await User.findById(id);
   if (!user) {
@@ -12,14 +13,23 @@ const getUser = async (id) => {
   return user;
 };
 
+// make first letter uppsercase
+const capitalizeWords = (str) => {
+  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+
+
+// register user 
 const createUser = async (userData) => {
 
   bcrypt.hash(userData.password, saltRounds, (err, hash) => {
     if (err) {
       return resizeBy.status(500).json(err);
     } else {
+
       const user = new User({
-        name: userData.name,
+        full_name: capitalizeWords(userData.fullName),
+        username: userData.username,
         email: userData.email,
         password: hash,
       })
