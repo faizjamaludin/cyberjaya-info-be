@@ -39,14 +39,7 @@ const createUser = async (userData, next) => {
         password: hash,
       })
 
-      user.save((err) => {
-        if (err) {
-          console.log(err)
-          return next(err);
-        } else {
-          return user;
-        }
-      });
+      user.save();
 
     }
   })
@@ -70,7 +63,7 @@ const loginUser = async (userData, next) => {
     return next(err);
   }
 
-  const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+  const token = jwt.sign({ userId: user._id, email: user.email, name: user.full_name }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
   return { user, token };
 

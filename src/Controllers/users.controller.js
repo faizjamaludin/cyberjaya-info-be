@@ -1,5 +1,6 @@
 const userService = require('../Services/users.service');
 
+// get user based on id
 const getUser = async (req, res, next) => {
   try {
     const user = await userService.getUser(req.params.id);
@@ -9,6 +10,7 @@ const getUser = async (req, res, next) => {
   }
 };
 
+// create user
 const createUser = async (req, res, next) => {
   try {
     const user = await userService.createUser(req.body);
@@ -19,6 +21,8 @@ const createUser = async (req, res, next) => {
   }
 };
 
+
+// login user
 const loginUser = async (req, res, next) => {
   try {
     const { user, token } = await userService.loginUser(req.query, next);
