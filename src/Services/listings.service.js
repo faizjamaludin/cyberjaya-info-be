@@ -37,12 +37,38 @@ const createListing = (listingData, next) => {
           from: listingData.openingHour.monday.from,
           to: listingData.openingHour.monday.to,
         },
+        tuesday: {
+          from: listingData.openingHour.tuesday.from,
+          to: listingData.openingHour.tuesday.to,
+        },
+        wednesday: {
+          from: listingData.openingHour.wednesday.from,
+          to: listingData.openingHour.wednesday.to,
+        },
+        thursday: {
+          from: listingData.openingHour.thursday.from,
+          to: listingData.openingHour.thursday.to,
+        },
+        friday: {
+          from: listingData.openingHour.friday.from,
+          to: listingData.openingHour.friday.to,
+        },
       },
+      list_pricing: {
+        list_category: {
+          cat_title: listingData.pricing.category.catTitle,
+          cat_item: {
+            item_title: listingData.pricing.category.catItem.itemTitle,
+            item_desc: listingData.pricing.category.catItem.itemDesc,
+            item_price: listingData.pricing.category.catItem.itemPrice
+          }
+        }
+      }
     },
   });
 
   listing.save();
-  console.log(listingData.address.address1);
+  // console.log(listingData.address.address1);
 };
 
 // get all listing
