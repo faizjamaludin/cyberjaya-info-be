@@ -5,6 +5,6 @@ const listingController = require("../Controllers/listings.controller");
 router.post("/", listingController.createListing);
 router.get("/alllist", listingController.getListing);
 router.get("/list/:id", listingController.getListingId);
-router.get("/list/user/:id", listingController.getListingId);
+router.get("/list/user/:id", listingController.getListingUserId);
 
 module.exports = router;

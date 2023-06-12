@@ -35,6 +35,7 @@ const getListingUserId = async (req, res, next) => {
   try {
     const userListing = await listingService.getListingUserId(req.params.id);
     res.status(200).json(userListing);
+    // console.log(userListing);
   } catch (error) {
     console.log(error);
   }

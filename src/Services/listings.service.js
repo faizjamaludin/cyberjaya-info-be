@@ -85,7 +85,7 @@ const getListingId = async (id) => {
 };
 
 const getListingUserId = async (id) => {
-  const userListing = await Listing.findOne({ userId: id });
+  const userListing = await Listing.find({ user_id: id });
   return userListing;
 };
 
