@@ -63,7 +63,13 @@ const loginUser = async (userData, next) => {
     return next(err);
   }
 
-  const token = jwt.sign({ userId: user._id, email: user.email, name: user.full_name }, process.env.SECRET_KEY, { expiresIn: '1h' });
+  data = {
+    userId: user._id,
+    email: user.email,
+    name: user.full_name,
+  }
+
+  const token = jwt.sign(data, process.env.SECRET_KEY, { expiresIn: '1h' });
 
   return { user, token };
 

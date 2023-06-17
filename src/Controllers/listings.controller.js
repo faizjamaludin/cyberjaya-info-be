@@ -41,9 +41,19 @@ const getListingUserId = async (req, res, next) => {
   }
 };
 
+const deleteListing = async (req, res, next) => {
+  try {
+    const listing = await listingService.deleteListing(req.params.id);
+    res.status(200).json(listing);
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 module.exports = {
   createListing,
   getListing,
   getListingId,
   getListingUserId,
+  deleteListing
 };
