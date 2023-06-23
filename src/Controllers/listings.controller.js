@@ -1,4 +1,6 @@
 const listingService = require("../Services/listings.service");
+const multer = require("multer");
+
 
 // create list
 const createListing = async (req, res, next) => {

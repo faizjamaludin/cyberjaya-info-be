@@ -43,7 +43,13 @@ const listingSchema = new mongoose.Schema({
         type: Number,
         min: 5,
       },
+      state: String,
     },
+    gallery: [{
+      path: String,
+      originalName: String,
+      mimeType: String
+    }],
     list_overview: String,
     list_phone: String,
     list_web: String,

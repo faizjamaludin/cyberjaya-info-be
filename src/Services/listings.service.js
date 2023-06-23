@@ -15,86 +15,80 @@ const capitalizeWords = (str) => {
 // create listing service
 
 const createListing = (listingData, next) => {
+
+  console.log(listingData);
+
+
+  // const item = listingData.pricing.pricingCat;
+  // const catItem = item.map((data, key) => {
+
+  //   const catData = data.catItem.map((item) => {
+
+  //     return {
+  //       item_title: item.itemTitle,
+  //       item_desc: item.itemDesc,
+  //       item_price: item.itemPrice,
+  //     };
+  //   });
+
+  //   const category = {
+  //     list_category: {
+  //       cat_title: data.catTitle,
+  //       cat_item: catData,
+  //     },
+  //   };
+
+  //   console.log(category);
+
+  //   return category;
+  // });
+
+
+
   // const listing = new Listing({
   //   user_id: listingData.userId,
   //   listing: {
-  //     list_type: listingData.listType,
-  //     list_cat: listingData.listCategory,
-  //     list_name: listingData.listName,
+  //     list_type: listingData.basicInfo.selectedType,
+  //     list_cat: listingData.basicInfo.selectedCategory,
+  //     list_name: listingData.basicInfo.listingName,
   //     list_address: {
   //       address1: listingData.address.address1,
   //       address2: listingData.address.address2,
-  //       postal: listingData.address.postal,
+  //       postal: listingData.address.zip,
+  //       state: listingData.address.selectedState,
   //     },
-  //     list_overview: listingData.overview,
-  //     list_phone: listingData.phone,
-  //     list_web: listingData.web,
-  //     list_email: listingData.email,
-  //     list_fb: listingData.fb,
-  //     list_insta: listingData.insta,
-  //     list_twitter: listingData.twitter,
+  //     list_overview: listingData.detailsOverview.overview,
+  //     list_phone: listingData.detailsOverview.phone,
+  //     list_web: listingData.detailsOverview.web,
+  //     list_email: listingData.detailsOverview.email,
+  //     list_fb: listingData.detailsOverview.fb,
+  //     list_insta: listingData.detailsOverview.insta,
+  //     list_twitter: listingData.detailsOverview.twitter,
   //     list_openingHour: {
   //       monday: {
-  //         from: listingData.openingHour.monday.from,
-  //         to: listingData.openingHour.monday.to,
+  //         from: "",
+  //         to: "",
   //       },
   //       tuesday: {
-  //         from: listingData.openingHour.tuesday.from,
-  //         to: listingData.openingHour.tuesday.to,
+  //         from: "",
+  //         to: "",
   //       },
   //       wednesday: {
-  //         from: listingData.openingHour.wednesday.from,
-  //         to: listingData.openingHour.wednesday.to,
+  //         from: "",
+  //         to: "",
   //       },
   //       thursday: {
-  //         from: listingData.openingHour.thursday.from,
-  //         to: listingData.openingHour.thursday.to,
+  //         from: "",
+  //         to: "",
   //       },
   //       friday: {
-  //         from: listingData.openingHour.friday.from,
-  //         to: listingData.openingHour.friday.to,
+  //         from: "",
+  //         to: "",
   //       },
   //     },
-  //     list_pricing: {
-  //       list_category: {
-  //         cat_title: listingData.pricing.category.catTitle,
-  //         cat_item: catItemObjects,
-  //       },
-  //     },
+  //     list_pricing: catItem,
   //   },
   // });
-  const item = listingData.categories;
-  // const catItemObjects = item.map((catItem, key) => {
-  //   return {
-  //     item_title: catItem.itemTitle,
-  //     item_desc: catItem.itemDesc,
-  //     item_price: catItem.itemPrice,
-  //   };
-  // });
-
-  const catItem = item.map((data, key) => {
-    console.log(key);
-
-    const catData = data.catItem.map((item) => {
-      return {
-        item_title: item.itemTitle,
-        item_desc: item.itemDesc,
-        item_price: item.itemPrice,
-      };
-    });
-
-    const category = {
-      list_category: {
-        cat_title: data.catTitle,
-        cat_item: catData,
-      },
-    };
-
-    return category;
-  });
-
-  // console.log(item[0].catItem);
-  console.log(catItem);
 
   const listing = new Listing({
     user_id: "",
@@ -106,6 +100,12 @@ const createListing = (listingData, next) => {
         address1: "",
         address2: "",
         postal: "",
+        state: "",
+      },
+      gallery: {
+        path: "",
+        originalName: '',
+        mimeType: '',
       },
       list_overview: "",
       list_phone: "",
@@ -136,11 +136,11 @@ const createListing = (listingData, next) => {
           to: "",
         },
       },
-      list_pricing: catItem,
+      list_pricing: "",
     },
   });
 
-  listing.save();
+  // listing.save();
 };
 
 // get all listing
