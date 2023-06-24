@@ -166,10 +166,17 @@ const deleteListing = async (id) => {
   return listing;
 };
 
+
+const testListing = async (listingData, next) => {
+  console.log(listingData.files);
+  console.log(listingData.body);
+}
+
 module.exports = {
   createListing,
   getListing,
   getListingId,
   getListingUserId,
   deleteListing,
+  testListing
 };

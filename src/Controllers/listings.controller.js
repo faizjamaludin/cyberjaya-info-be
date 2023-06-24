@@ -52,10 +52,22 @@ const deleteListing = async (req, res, next) => {
   }
 };
 
+
+// #################################
+const testListing = async (req, res, next) => {
+  try {
+    const listing = await listingService.testListing(req);
+    res.status(200).json(listing);
+  } catch (error) {
+
+  }
+}
+
 module.exports = {
   createListing,
   getListing,
   getListingId,
   getListingUserId,
-  deleteListing
+  deleteListing,
+  testListing
 };

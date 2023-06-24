@@ -27,8 +27,8 @@ const storage = multer.diskStorage({
     cb(null, 'Assets/')
   },
   filename: function (req, file, cb) {
-    console.log(file)
-    cb(null, file.originalname + '-' + Date.now() + path.extname(file.originalname));
+    console.log(req.body)
+    // cb(null, file.originalname + path.extname(file.originalname));
   }
 });
 
@@ -51,7 +51,7 @@ app.use("/users", usersRouter);
 app.use("/listing", listingRouter);
 app.use("/comment", commentRouter);
 app.post('/photos/upload', upload.array('gallery.pictures'), function (req, res, next) {
-  console.log(req.files)
+  console.log(req.body)
 })
 app.use(express.json())
 
