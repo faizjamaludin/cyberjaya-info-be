@@ -1,4 +1,5 @@
 const Listing = require("../Models/listingModel");
+const path = require("path");
 
 // make first letter uppsercase
 const capitalizeWords = (str) => {
@@ -15,105 +16,55 @@ const capitalizeWords = (str) => {
 // create listing service
 
 const createListing = (listingData, next) => {
+  const obj = JSON.parse(listingData.body.data);
 
-  console.log(listingData);
+  const item = obj.pricing.pricingCat;
+  const catItem = item.map((data, key) => {
+    const catData = data.catItem.map((item) => {
+      return {
+        item_title: item.itemTitle,
+        item_desc: item.itemDesc,
+        item_price: item.itemPrice,
+      };
+    });
 
+    const category = {
+      list_category: {
+        cat_title: data.catTitle,
+        cat_item: catData,
+      },
+    };
 
-  // const item = listingData.pricing.pricingCat;
-  // const catItem = item.map((data, key) => {
+    console.log(category);
 
-  //   const catData = data.catItem.map((item) => {
+    return category;
+  });
 
-  //     return {
-  //       item_title: item.itemTitle,
-  //       item_desc: item.itemDesc,
-  //       item_price: item.itemPrice,
-  //     };
-  //   });
-
-  //   const category = {
-  //     list_category: {
-  //       cat_title: data.catTitle,
-  //       cat_item: catData,
-  //     },
-  //   };
-
-  //   console.log(category);
-
-  //   return category;
-  // });
-
-
-
-  // const listing = new Listing({
-  //   user_id: listingData.userId,
-  //   listing: {
-  //     list_type: listingData.basicInfo.selectedType,
-  //     list_cat: listingData.basicInfo.selectedCategory,
-  //     list_name: listingData.basicInfo.listingName,
-  //     list_address: {
-  //       address1: listingData.address.address1,
-  //       address2: listingData.address.address2,
-  //       postal: listingData.address.zip,
-  //       state: listingData.address.selectedState,
-  //     },
-  //     list_overview: listingData.detailsOverview.overview,
-  //     list_phone: listingData.detailsOverview.phone,
-  //     list_web: listingData.detailsOverview.web,
-  //     list_email: listingData.detailsOverview.email,
-  //     list_fb: listingData.detailsOverview.fb,
-  //     list_insta: listingData.detailsOverview.insta,
-  //     list_twitter: listingData.detailsOverview.twitter,
-  //     list_openingHour: {
-  //       monday: {
-  //         from: "",
-  //         to: "",
-  //       },
-  //       tuesday: {
-  //         from: "",
-  //         to: "",
-  //       },
-  //       wednesday: {
-  //         from: "",
-  //         to: "",
-  //       },
-  //       thursday: {
-  //         from: "",
-  //         to: "",
-  //       },
-  //       friday: {
-  //         from: "",
-  //         to: "",
-  //       },
-  //     },
-  //     list_pricing: catItem,
-  //   },
+  // listingData.files.map((data, key) => {
+  //   return {
+  //     path : path.join('Assets', )
+  //   }
   // });
 
   const listing = new Listing({
-    user_id: "",
+    user_id: obj.userId,
     listing: {
-      list_type: "",
-      list_cat: "",
-      list_name: "",
+      list_type: obj.basicInfo.selectedType,
+      list_cat: obj.basicInfo.selectedCategory,
+      list_name: obj.basicInfo.listingName,
       list_address: {
-        address1: "",
-        address2: "",
-        postal: "",
-        state: "",
+        address1: obj.address.address1,
+        address2: obj.address.address2,
+        postal: obj.address.zip,
+        state: obj.address.selectedState,
       },
-      gallery: {
-        path: "",
-        originalName: '',
-        mimeType: '',
-      },
-      list_overview: "",
-      list_phone: "",
-      list_web: "",
-      list_email: "",
-      list_fb: "",
-      list_insta: "",
-      list_twitter: "",
+      list_overview: obj.detailsOverview.overview,
+      list_phone: obj.detailsOverview.phone,
+      list_web: obj.detailsOverview.web,
+      list_email: obj.detailsOverview.email,
+      list_fb: obj.detailsOverview.fb,
+      list_insta: obj.detailsOverview.insta,
+      list_twitter: obj.detailsOverview.twitter,
       list_openingHour: {
         monday: {
           from: "",
@@ -136,11 +87,61 @@ const createListing = (listingData, next) => {
           to: "",
         },
       },
-      list_pricing: "",
+      list_pricing: catItem,
     },
   });
 
-  // listing.save();
+  //   const listing = new Listing({
+  //     user_id: "",
+  //     listing: {
+  //       list_type: "",
+  //       list_cat: "",
+  //       list_name: "",
+  //       list_address: {
+  //         address1: "",
+  //         address2: "",
+  //         postal: "",
+  //         state: "",
+  //       },
+  //       gallery: {
+  //         path: "",
+  //         originalName: "",
+  //         mimeType: "",
+  //       },
+  //       list_overview: "",
+  //       list_phone: "",
+  //       list_web: "",
+  //       list_email: "",
+  //       list_fb: "",
+  //       list_insta: "",
+  //       list_twitter: "",
+  //       list_openingHour: {
+  //         monday: {
+  //           from: "",
+  //           to: "",
+  //         },
+  //         tuesday: {
+  //           from: "",
+  //           to: "",
+  //         },
+  //         wednesday: {
+  //           from: "",
+  //           to: "",
+  //         },
+  //         thursday: {
+  //           from: "",
+  //           to: "",
+  //         },
+  //         friday: {
+  //           from: "",
+  //           to: "",
+  //         },
+  //       },
+  //       list_pricing: "",
+  //     },
+  //   });
+
+  //   // listing.save();
 };
 
 // get all listing
@@ -166,11 +167,12 @@ const deleteListing = async (id) => {
   return listing;
 };
 
-
 const testListing = async (listingData, next) => {
-  console.log(listingData.files);
-  console.log(listingData.body);
-}
+  // console.log(JSON.parse(listingData.body.data));
+  // listingData.body.data.map((item, key) => {
+  //   console.log(item);
+  // });
+};
 
 module.exports = {
   createListing,
@@ -178,5 +180,5 @@ module.exports = {
   getListingId,
   getListingUserId,
   deleteListing,
-  testListing
+  testListing,
 };

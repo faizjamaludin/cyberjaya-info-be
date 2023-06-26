@@ -1,11 +1,9 @@
 const listingService = require("../Services/listings.service");
-const multer = require("multer");
-
 
 // create list
 const createListing = async (req, res, next) => {
   try {
-    const listing = await listingService.createListing(req.body);
+    const listing = await listingService.createListing(req);
     // console.log(req.body);
     res.status(201).json(listing);
   } catch (err) {
@@ -48,20 +46,17 @@ const deleteListing = async (req, res, next) => {
     const listing = await listingService.deleteListing(req.params.id);
     res.status(200).json(listing);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
-
 
 // #################################
 const testListing = async (req, res, next) => {
   try {
     const listing = await listingService.testListing(req);
     res.status(200).json(listing);
-  } catch (error) {
-
-  }
-}
+  } catch (error) {}
+};
 
 module.exports = {
   createListing,
@@ -69,5 +64,5 @@ module.exports = {
   getListingId,
   getListingUserId,
   deleteListing,
-  testListing
+  testListing,
 };
