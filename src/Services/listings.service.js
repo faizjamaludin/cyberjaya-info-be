@@ -35,16 +35,22 @@ const createListing = (listingData, next) => {
       },
     };
 
-    console.log(category);
 
     return category;
   });
 
-  // listingData.files.map((data, key) => {
-  //   return {
-  //     path : path.join('Assets', )
-  //   }
-  // });
+  // console.log(obj)
+
+  const fileItem = listingData.files.map((data, key) => {
+    console.log(data)
+    return {
+      path: data.path,
+      originalName: data.originalname,
+      mimeType: data.mimetype
+    }
+  });
+
+
 
   const listing = new Listing({
     user_id: obj.userId,
@@ -65,6 +71,7 @@ const createListing = (listingData, next) => {
       list_fb: obj.detailsOverview.fb,
       list_insta: obj.detailsOverview.insta,
       list_twitter: obj.detailsOverview.twitter,
+      gallery: fileItem,
       list_openingHour: {
         monday: {
           from: "",
@@ -141,7 +148,7 @@ const createListing = (listingData, next) => {
   //     },
   //   });
 
-  //   // listing.save();
+  listing.save();
 };
 
 // get all listing
