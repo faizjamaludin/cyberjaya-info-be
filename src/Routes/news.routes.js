@@ -4,7 +4,8 @@ const userController = require("../Controllers/users.controller");
 const newsController = require("../Controllers/news.controller");
 
 router.post("/", newsController.addNews);
-router.get("/id/:id", userController.getUser);
+router.get("/all", newsController.getAllNews);
+router.get("/:id", newsController.getNews);
 router.get("/login", userController.loginUser);
 
 module.exports = router;
