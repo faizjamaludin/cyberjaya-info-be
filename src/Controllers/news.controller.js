@@ -3,11 +3,16 @@ const newsService = require("../Services/news.service");
 // create user
 const addNews = async (req, res, next) => {
   try {
-    const news = await newsService.addNews(req.body);
+    const news = await newsService.addNews(req);
     // res.status(201).send({ message: 'register successful' });
-    res.status(201).json(news);
+    res.status(201).json({
+      message: "News created successfully!",
+      news: news,
+    });
   } catch (err) {
-    next(err);
+    res.status(500).json({
+      error: err,
+    });
   }
 };
 
@@ -16,7 +21,9 @@ const getAllNews = async (req, res, next) => {
     const news = await newsService.getAllNews();
     res.status(201).json(news);
   } catch (err) {
-    next(err);
+    res.status(500).json({
+      error: err,
+    });
   }
 };
 

@@ -13,6 +13,7 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, "assets")));
 
 // Set variable
 var usersRouter = require("./src/Routes/users.routes");
